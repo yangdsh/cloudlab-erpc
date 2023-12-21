@@ -29,7 +29,7 @@ clients = ["client-%d" % x for x in range(nclients)]
 nodes = [request.RawPC(node) for node in servers + clients]
 
 for i, node in enumerate (nodes): 
-    node.hardware_type = 'c6525-100g'
+    # node.hardware_type = 'c6525-100g'
     node.disk_image = 'urn:publicid:IDN+utah.cloudlab.us+image+lrbplus-PG0:ubuntu22-py'
     bs = node.Blockstore("bs"+str(i), "/nfs")
     bs.size = "200GB"
