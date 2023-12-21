@@ -11,6 +11,7 @@ import geni.rspec.emulab as emulab
 # Describe the parameter(s) this profile script can accept.
 portal.context.defineParameter("c", "Number of clients", portal.ParameterType.INTEGER, 1)
 portal.context.defineParameter("s", "Number of servers", portal.ParameterType.INTEGER, 1)
+portal.context.defineParameter("hardware_type", "Hardware type", portal.ParameterType.NODETYPE, 'c6525-100g')
 
 # Retrieve the values the user specifies during instantiation.
 params = portal.context.bindParameters()
@@ -29,7 +30,7 @@ clients = ["client-%d" % x for x in range(nclients)]
 nodes = [request.RawPC(node) for node in servers + clients]
 
 for i, node in enumerate (nodes): 
-    # node.hardware_type = 'c6525-100g'
+    node.hardware_type = params.hardware_type
     node.disk_image = 'urn:publicid:IDN+utah.cloudlab.us+image+lrbplus-PG0:ubuntu22-py'
     bs = node.Blockstore("bs"+str(i), "/nfs")
     bs.size = "200GB"
